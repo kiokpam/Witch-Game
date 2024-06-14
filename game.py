@@ -6,9 +6,6 @@ def make_bg():
     screen.blit(bg, (bg_pos, 0))
     screen.blit(bg, (bg_pos + 900, 0))
 
-# def create_ball():
-#     # random_ball_pos=random.choice([0, 50, 100])
-#     return ball_sur.get_rect(midtop=(900,20))
 def move_ball(balls):
     for ball in balls:
         ball.rect.centerx -=4
@@ -44,16 +41,12 @@ class Ball():
         self.pos=random.choice([50,60,70,80])
         self.rect=ball_sur.get_rect(center=(900,self.pos))
 
-# #Alphabet
-# game_font=pygame.font.Font('04B_19.ttf',40)
-# alpha=pygame.USEREVENT+1
-# pygame.time.set_timer(alpha,600)
-
 Active=True
-#Other
+
 pygame.display.set_caption("The Witch Game")
 clock = pygame.time.Clock()
 score=0
+high_score=0
 running = True
 while running:
     for event in pygame.event.get():
@@ -79,23 +72,26 @@ while running:
         ball_list=move_ball(ball_list)
         draw_ball(ball_list)
         keys=pygame.key.get_pressed()
-    # Chỉ xét các quả bóng trên màn hình
+
         for ball in ball_list:
             if keys[pygame.K_0 + int(ball.key)]:
-                # print("Bạn đã nhấn phím", ball.key)
+                
                 pygame.draw.line(screen,(0,0,255),(100,100),(ball.rect.centerx,ball.rect.centery),10)
                 ball_list.remove(ball)
                 draw_ball(ball_list)
                 score+=1
+        score_surface=game_font.render(str(score),True, (255,0,0))
+        screen.blit(score_surface,(450,150))
     else:
+        if score>high_score:
+            high_score=score
         score=0
         lose=game_font.render(f'Press Space to play again',True, (255,0,0))
         lose_rect=lose.get_rect(center=(450,250))
         screen.blit(lose,lose_rect)
-        score_surface=game_font.render(str(score),True, (255,0,0))
-        screen.blit(score_surface,(450,150))
-    score_surface=game_font.render(str(score),True, (255,0,0))
-    screen.blit(score_surface,(450,150))
+        score_surface=game_font.render(f'High score: {high_score}',True, (255,0,0))
+        screen.blit(score_surface,(250,150))
+    
     screen.blit(witch, witch_rect)
     pygame.display.update()
     clock.tick(60)
