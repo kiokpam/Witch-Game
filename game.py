@@ -1,7 +1,7 @@
 import pygame,random
 
 pygame.init()
-game_font=pygame.font.Font('Swiss.ttf',40)
+game_font=pygame.font.Font('source/Swiss.ttf',40)
 def make_bg():
     screen.blit(bg, (bg_pos, 0))
     screen.blit(bg, (bg_pos + 900, 0))
@@ -25,15 +25,15 @@ def check_collision(balls):
             return False
     return True
 #Backrgound
-bg = pygame.image.load("pic/bg.png")
+bg = pygame.image.load("source/bg.png")
 bg_pos = 0
 #witch
-witch = pygame.image.load("pic/witch.png")
+witch = pygame.image.load("source/witch.png")
 witch = pygame.transform.scale(witch, (witch.get_width() // 2, witch.get_height() // 2))
 witch_rect = witch.get_rect(center=(100, 100))
 
 #ball
-ball_sur=pygame.image.load('pic/ball.png')
+ball_sur=pygame.image.load('source/ball.png')
 ball_sur=pygame.transform.scale(ball_sur,(100,100))
 ball_list=[]
 spawnball=pygame.USEREVENT
