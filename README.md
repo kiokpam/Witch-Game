@@ -11,4 +11,10 @@ The balloons move from the right to the left. If it touch the witch, you will lo
 
 High score will also be saved.
 
-Try the game!
+Run the game:
+___
+```
+pip install pygame
+python game.py
+```
+
